@@ -26,29 +26,13 @@
       }
     ]
   },
-  "description": "Dashboard for Micrometer instrumented applications (Java, Spring Boot, Micronaut)",
+  "description": "Dashboard for Micrometer instrumented applications (Java, Spring Boot)",
   "editable": true,
   "gnetId": 4701,
   "graphTooltip": 1,
   "iteration": 1553765841423,
   "links": [],
   "panels": [
-    {
-      "content": "\n# Acknowledgments\n\nThank you to [Michael Weirauch](https://twitter.com/emwexx) for creating this dashboard: see original JVM (Micrometer) dashboard at [https://grafana.com/dashboards/4701](https://grafana.com/dashboards/4701)\n\n\n\n",
-      "gridPos": {
-        "h": 3,
-        "w": 24,
-        "x": 0,
-        "y": 0
-      },
-      "id": 141,
-      "links": [],
-      "mode": "markdown",
-      "timeFrom": null,
-      "timeShift": null,
-      "title": "Acknowledgments",
-      "type": "text"
-    },
     {
       "collapsed": false,
       "gridPos": {

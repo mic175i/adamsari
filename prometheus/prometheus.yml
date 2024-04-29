@@ -26,4 +26,9 @@ scrape_configs:
     # password: admin
     metrics_path: "/actuator/prometheus"
     static_configs:
-      - targets: ['host.docker.internal:8080', 'host.docker.internal:8082']
+      - targets: ['host.docker.internal:8080']
+        labels:
+          service: 'pool-api'
+      - targets: ['host.docker.internal:8082']
+        labels:
+          service: 'pool-dss'
