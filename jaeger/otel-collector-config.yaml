@@ -5,30 +5,41 @@ receivers:
         endpoint: 0.0.0.0:4317
       http:
         endpoint: 0.0.0.0:4318
-processors:
-extensions:
-  health_check: {}
+
 exporters:
+  elasticsearch:
+    endpoint: http://elasticsearch:9400
+    index: otel-logs
   otlp:
     endpoint: jaeger:4317
     tls:
-      insecure: true    
+      insecure: true
   debug:
-      verbosity: detailed
-      sampling_initial: 5
-      sampling_thereafter: 200
+    verbosity: detailed
+    sampling_initial: 5
+    sampling_thereafter: 200
   prometheus:
-    endpoint: "0.0.0.0:9090"
-connectors:
-  spanmetrics:
+    endpoint: 0.0.0.0:9090
+
+processors:
+  batch:
+    send_batch_size: 512
+    timeout: 2s
+
+extensions:
+  health_check: {}
+  
 service:
   pipelines:
     traces:
       receivers: [otlp]
-      exporters: [otlp, debug, spanmetrics]
+      processors: [batch]
+      exporters: [otlp, debug]
     metrics:
-      receivers: [spanmetrics]
-      exporters: [otlp, prometheus]
+      receivers: [otlp]
+      processors: [batch]
+      exporters: [prometheus]
     logs:
       receivers: [otlp]
-      exporters: [otlp, debug]
+      processors: [batch]
+      exporters: [elasticsearch, debug]

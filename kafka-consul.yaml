@@ -1,4 +1,3 @@
-version: '2.1'
 name: consul
 services:
   postgresql:
@@ -14,7 +13,7 @@ services:
   conduktor-platform:
     image: conduktor/conduktor-platform:latest
     ports:
-      - "9090:8080"
+      - "8888:8080"
     volumes:
       - conduktor_data:/var/conduktor
     environment:
@@ -25,10 +24,8 @@ services:
       CDK_CLUSTERS_0_ID: "default"
       CDK_CLUSTERS_0_NAME: "My Local Kafka Cluster"
       CDK_CLUSTERS_0_COLOR: "#0013E7"
-      CDK_CLUSTERS_0_BOOTSTRAPSERVERS: "PLAINTEXT://kafka1:29092,PLAINTEXT://kafka1:19092"
-      CDK_CLUSTERS_0_SCHEMAREGISTRY_URL: "http://kafka-schema-registry:8081"
-      CDK_CLUSTERS_0_KAFKACONNECTS_0_URL: "http://kafka-connect:8083"
-      CDK_CLUSTERS_0_KAFKACONNECTS_0_NAME: "MikeCore"
+      CDK_CLUSTERS_0_BOOTSTRAPSERVERS: "PLAINTEXT://host.docker.internal:29092,PLAINTEXT://host.docker.internal:29093,PLAINTEXT://host.docker.internal:29094"
+      CDK_CLUSTERS_0_SCHEMAREGISTRY_URL: "http://host.docker.internal:8081"
 volumes:
   pg_data: {}
   conduktor_data: {}
